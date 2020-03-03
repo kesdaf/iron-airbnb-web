@@ -30,18 +30,15 @@ export function Register(props) {
     const handleSubmit = (event) => {
         event.preventDefault()
 
-        setUserForm({ data: userForm.data, loading: true, error: false });
-       debugger 
+        setUserForm({ data: userForm.data, loading: true, error: false }); 
+
         const formData = Object.keys(userForm.data).reduce((data,k) => {
                 data.append(k,userForm.data[k]);
                 return data;
             },new FormData()) 
-
-
         Service.register(formData)
             .then(
                 (user) => {
-                    debugger
                     return <Redirect to="/"/>
                 },
                 () => {
