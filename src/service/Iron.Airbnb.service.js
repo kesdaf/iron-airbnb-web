@@ -17,12 +17,33 @@ http.interceptors.response.use(
     }
 )
 
-const login = ({email,password}) => http.post('/login', { email, password })
+const login = (user) => http.post('/login',user)
 const logout = () => http.post('/logout')
-const register = ({email,password,type,avatar}) => http.post('/user',{email,password,type,avatar})
+const register = (newUser) => http.post('/user', newUser)
+
+const createLocal = (local) => http.post('/locals',local);
+const getLocals = ()=> http.get('/locals');
+const deleteLocal = (id)=> http.delete(`/locals/${id}`);
+const findLocal = (find) => http.post('/findLocal',find);
+const getLocalDetail = (id) => http.get(`/locals/${id}`);
+const getLocalReserves = (id) => http.get(`/reserve/local/${id}`);
+const createReserve = (body) => http.post(`/reserve`,body);
+const getReserves = ()=> http.get('/reserve');
+const acceptReserve = (id) => http.patch(`/reserve/${id}`);
+const deleteReserve = (id) => http.delete(`/reserve/${id}`);
 
 export default {
     login,
     logout,
-    register
+    register,
+    createLocal,
+    getLocals,
+    deleteLocal,
+    findLocal,
+    getLocalDetail,
+    getLocalReserves,
+    createReserve,
+    getReserves,
+    acceptReserve,
+    deleteReserve
 }

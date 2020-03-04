@@ -22,13 +22,13 @@ export class Login extends Component {
   }
 
   handleSubmit = (event) => {
-    event.preventDefault()
-
+    event.preventDefault();
     this.setState({ loading: true, error: false }, () => {
         IronAirBnbService.login({ ...this.state.data })
         .then(
           (user) => {
-            this.props.setUser(user)
+            console.log(user)
+            this.props.updateUser(user)
           },
           () => {
             this.setState({ error: true, loading: false })

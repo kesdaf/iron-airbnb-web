@@ -18,7 +18,7 @@ export function AuthContextProvider(props){
       }
       const value = {
         currentUser: user,
-        setUser: updateUser,
+        updateUser: updateUser,
         logout: logout
       }
       return(
@@ -27,38 +27,7 @@ export function AuthContextProvider(props){
       </AuthContext.Provider>
       )
 }
-// export class AuthContextProvider extends Component{
-//     state = {
-//         user: JSON.parse(localStorage.getItem('user'))
-//       }
-    
-//       setUser = (user) => {
-//         localStorage.setItem('user', user ? JSON.stringify(user) : null)
-//         this.setState({ user })
-//       }
-    
-//       logout = () => {
-//         ironAirbnbService.logout()
-//           .then(() => {
-//             this.setUser()
-//           })
-//       }
-      
-    
-//       render() {
-//         const value = {
-//           currentUser: this.state.user,
-//           setUser: this.setUser,
-//           logout: this.logout
-//         }
-    
-//         return (
-//           <AuthContext.Provider value={value}>
-//             {this.props.children}
-//           </AuthContext.Provider>
-//         )
-//       }
-// }
+
 
 export const WithAuthConsumer = (WrappedComponent) => (props) => (
     <AuthContext.Consumer>
