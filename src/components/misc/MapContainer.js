@@ -8,9 +8,11 @@ export class MapContainer extends Component {
     super(props);
     this.state = {
       markers: [],
-      infoIndex: null
+      infoIndex: null,
+
     };
     this.onMapClick = this.onMapClick.bind(this);
+    this.onMarkClick = props.resultClicked
   }
   onMapClick(t, map, coord) {
 
@@ -31,14 +33,19 @@ export class MapContainer extends Component {
       };
     });
   }
-  onMarkerClick = (props, marker, e) =>
-    this.setState(s =>{
+  onMarkerHover = (props, marker, e) =>
+    this.setState(s => {
       return {
         ...s,
-      infoDump: props.infoContent,
-      activeMarker: marker,
-      showingInfoWindow: true
-    }});
+        infoDump: props.infoContent,
+        activeMarker: marker,
+        showingInfoWindow: true
+      }
+    });
+
+  onMarkerClick = (propsMarker, marker, e) => {
+    this.onMarkClick(propsMarker.id)
+  }
 
   render() {
     const center = this.props.latitude && this.props.longitude ?
@@ -71,42 +78,35 @@ export class MapContainer extends Component {
               position={marker.position}
             />
           ))}
-          {restults.map((result, index) => (             
+          {restults.map((result, index) => (
             <Marker
               key={index}
+              id={result.id}
               title={result.title}
               position={{ lat: result.latitude, lng: result.longitude }}
               onClick={this.onMarkerClick}
-              infoContent={<WindowContent {...{...result, handleClick: resultClicked}} />} />
+              onMouseout={this.onMarkerHover}
+              infoContent={<WindowContent {...result} />} />
           ))}
-            <InfoWindow
-                marker={this.state.activeMarker}
-                visible={this.state.showingInfoWindow}>
-                  {this.state.infoDump}
-              </InfoWindow>
+          <InfoWindow
+            marker={this.state.activeMarker}
+            visible={this.state.showingInfoWindow}>
+            <p>{this.state.infoDump}</p>
+
+          </InfoWindow>
         </Map>
       </div>
     );
   }
 }
 
-const WindowContent = ({ title, price, description, id, img, handleClick }) => {
-  console.info('fn => ', handleClick)
+const WindowContent = ({ title, price, description, id, img }) => {
   return (
     <div>
       <h6>{title}</h6>
       <b>{price}</b>
       <p>{description}</p>
-      <button
-        type="submit"
-        className="btn btn-primary"
-        value={id}
-        onClick={function() {
-          handleClick(id)
-        }.bind(this)} >
-          View
-      </button>
-      <img src={img}/>
+      <img src={img} />
     </div>
   )
 }

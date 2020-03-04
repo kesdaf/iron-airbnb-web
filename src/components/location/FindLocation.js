@@ -15,6 +15,7 @@ export default function FindLocation() {
             price_max: Infinity,
         },
         results: [],
+        clickMarker:null
     })
     const handleChange = (event) => {
         const { name, value } = event.target
@@ -57,10 +58,15 @@ export default function FindLocation() {
     }
     const resultClicked = (id) =>{
         console.info('ID => ', id)
-        // return (<Redirect to={`/locals/${id}`}/>)
+        setFilterForm({
+            ...filterForm,
+            clickMarker:id
+        })
     }
+    
     return (
         <div className="FindLocation">
+            {filterForm.clickMarker && <Redirect to={`/FindLocal/${filterForm.clickMarker}`}/>}
             {JSON.stringify(filterForm.data)}
             <form onSubmit={handleSubmit}>
                 <div className="form-group">

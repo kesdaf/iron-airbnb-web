@@ -3,11 +3,12 @@ import MapContainer from '../misc/MapContainer'
 import Service from '../../service/Iron.Airbnb.service';
 import { Redirect } from 'react-router-dom';
 
-function AddLocation(){
+function AddLocation(props){
     const [localForm, setLocalForm] = useState({
         error: false,
         loading: true,
         data: {
+         //   _id:props? props.id? id:null:null,
             title: '',
             price: 0,
             images: [],

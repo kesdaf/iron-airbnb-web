@@ -13,6 +13,8 @@ import MyLocations from './components/location/MyLocations';
 import UserMenu from './components/user/userMenu';
 import IsUserRoute from './components/misc/IsUserRoute';
 import FindLocation from './components/location/FindLocation';
+import LocationReserve from './components/location/LocationReserve';
+import Reserves from './components/owner/Reserves';
 
 function App(props) {
   let home = ''
@@ -35,7 +37,9 @@ function App(props) {
         </AuthenticatedRoute>
         <IsOwnerRoute exact path="/AddLocal" component={AddLocation}/>
         <IsOwnerRoute exact path="/MyLocals" component={MyLocations}/>
+        <AuthenticatedRoute exact path="/reserves" component={Reserves}/>
         <IsUserRoute exact path="/FindLocal" component={FindLocation}/>
+        <IsUserRoute exact path="/FindLocal/:id" component={LocationReserve}/>
         <Redirect to="/" />
       </Switch>
     </div>

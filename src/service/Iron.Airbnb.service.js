@@ -25,6 +25,13 @@ const createLocal = (local) => http.post('/locals',local);
 const getLocals = ()=> http.get('/locals');
 const deleteLocal = (id)=> http.delete(`/locals/${id}`);
 const findLocal = (find) => http.post('/findLocal',find);
+const getLocalDetail = (id) => http.get(`/locals/${id}`);
+const getLocalReserves = (id) => http.get(`/reserve/local/${id}`);
+const createReserve = (body) => http.post(`/reserve`,body);
+const getReserves = ()=> http.get('/reserve');
+const acceptReserve = (id) => http.patch(`/reserve/${id}`);
+const deleteReserve = (id) => http.delete(`/reserve/${id}`);
+
 export default {
     login,
     logout,
@@ -32,5 +39,11 @@ export default {
     createLocal,
     getLocals,
     deleteLocal,
-    findLocal
+    findLocal,
+    getLocalDetail,
+    getLocalReserves,
+    createReserve,
+    getReserves,
+    acceptReserve,
+    deleteReserve
 }
